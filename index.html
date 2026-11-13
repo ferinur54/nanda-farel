@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f8dce7">
+<title>Congratulations on Your Engagement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+/* =========================
+   WARNA WEBSITE
+========================= */
+:root {
+  --pink: #e99ab8;
+  --pink-dark: #ce7598;
+  --gold: #c69b62;
+  --cream: #fff8fa;
+  --text: #80566a;
+  --muted: #a77d91;
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at 15% 20%, #ffd6e5, transparent 40%),
+    radial-gradient(circle at 85% 65%, #f5bfd5, transparent 40%),
+    linear-gradient(145deg, #fff0f5, #f9dce8, #fceaf1);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+/* =========================
+   ANIMASI
+========================= */
+@keyframes twinkle {
+  to {
+    opacity: .15;
+    transform: scale(.5);
+  }
+}
+@keyframes float {
+  50% {
+    transform: translateY(-15px) rotate(5deg);
+  }
+}
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes pulse {
+  50% {
+    transform: scale(1.08);
+  }
+}
+.stars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: white;
+  animation: twinkle 3s infinite alternate;
+}
+
+/* =========================
+   HALAMAN PEMBUKA
+========================= */
+.cover {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 30px 20px;
+  background:
+    linear-gradient(#e7e5e688, #fce4edaa),
+    url("assets/images/foto-1.jpg")
+    center 45% / cover no-repeat;
+  position: relative;
+  z-index: 2;
+}
+.cover-content {
+  max-width: 700px;
+  width: 100%;
+  padding: 35px 20px;
+  background: #fff8fa9c;
+  backdrop-filter: blur(8px);
+  border: 1px solid #d65d67;
+  border-radius: 25px;
+  box-shadow: 0 15px 60px #bd789744;
+  animation: fadeIn 1.5s ease;
+}
+.cover-heart {
+  font-size: 55px;
+  color: var(--pink-dark);
+  animation: float 4s infinite ease-in-out;
+}
+.eyebrow {
+  color: var(--gold);
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  font-size: .7rem;
+}
+.cover h1 {
+  font: 600 clamp(2.8rem, 8vw, 5.5rem)/1.1 'Playfair Display', serif;
+  color: #a65c7b;
+  margin: 20px 0;
+}
+.cover h1 span {
+  color: var(--pink-dark);
+  font-style: italic;
+}
+.cover-description {
+  color: #986c82;
+  line-height: 1.9;
+  max-width: 500px;
+  margin: 20px auto;
+}
+.cover-names {
+  font: 500 clamp(1.6rem, 5vw, 2.5rem) 'Playfair Display', serif;
+  color: #b77a91;
+  margin: 25px 0;
+}
+
+/* =========================
+   BUTTON
+========================= */
+.btn {
+  display: inline-block;
+  border: 0;
+  border-radius: 40px;
+  padding: 15px 28px;
+  background: linear-gradient(120deg, #e99ab8, #d77c9f);
+  color: white;
+  font-family: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 8px 30px #d77c9f44;
+  transition: .3s;
+}
+.btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 35px #d77c9f66;
+}
+.btn:disabled {
+  opacity: .7;
+  cursor: default;
+}
+
+/* =========================
+   WEBSITE TERSEMBUNYI
+========================= */
+#siteContent,
+#musicBtn {
+  display: none;
+}
+body.opened #siteContent {
+  display: block;
+  animation: fadeIn 1.2s ease;
+}
+body.opened #musicBtn {
+  display: block;
+}
+body.opened #cover {
+  display: none;
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  gap: clamp(12px, 3vw, 32px);
+  padding: 17px 10px;
+  background: #fff0f5ed;
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid #e9a8bd55;
+}
+nav a {
+  color: #89556e;
+  text-decoration: none;
+  font-size: .72rem;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+nav a:hover {
+  color: var(--pink-dark);
+}
+
+/* =========================
+   SECTION UMUM
+========================= */
+section {
+  position: relative;
+  z-index: 1;
+  max-width: 1050px;
+  margin: auto;
+  padding: 100px 22px;
+}
+.section-title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.section-title h2 {
+  font: 600 clamp(2.1rem, 5vw, 3.5rem) 'Playfair Display', serif;
+  color: #a65c7b;
+  margin: 12px 0;
+}
+.section-title p {
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+/* =========================
+   UCAPAN
+========================= */
+.card {
+  background: linear-gradient(145deg, #fff8fa, #fce6ef);
+  border: 1px solid #e9a8bd77;
+  border-radius: 24px;
+  padding: clamp(25px, 5vw, 48px);
+  box-shadow: 0 20px 60px #bd789722;
+}
+.letter {
+  max-width: 760px;
+  margin: auto;
+  text-align: center;
+  line-height: 2.1;
+  color: #80566a;
+}
+.salute {
+  font: 600 1.8rem 'Playfair Display', serif;
+  color: var(--pink-dark);
+}
+.signature {
+  font: italic 1.4rem 'Playfair Display', serif;
+  color: var(--gold);
+  margin-top: 25px;
+}
+
+/* =========================
+   GALERI FOTO
+========================= */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+.photo {
+  background: #fff8fa;
+  padding: 10px 10px 16px;
+  border-radius: 5px;
+  transform: rotate(var(--r));
+  box-shadow: 0 15px 35px #0002;
+  transition: .3s;
+  cursor: pointer;
+}
+.photo:hover {
+  transform: rotate(0) translateY(-8px) scale(1.03);
+}
+.photo img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+}
+.photo p {
+  color: #754c60;
+  text-align: center;
+  font: italic 1rem 'Playfair Display', serif;
+  margin: 12px 0 0;
+}
+
+/* =========================
+   IMAGE WRAP (UNTUK FOTO KHUSUS)
+========================= */
+.image-wrap {
+  max-width: 480px;
+  width: 90%;
+  margin: 16px auto;
+  padding: 8px;
+  background: #ffffff88;
+  border: 1px solid #e9a8bd77;
+  border-radius: 18px;
+}
+.image-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  max-height: 420px;
+  object-fit: cover;
+  background: #09070d;
+}
+.image-note {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-top: 15px;
+}
+
+/* =========================
+   IMAGE WRAP (HP Friendly)
+========================= */
+.video-wrap {
+
+
+
+  max-width: 760px;
+  margin: auto;
+  padding: 12px;
+  background: #ffffff88;
+  border: 1px solid #e9a8bd77;
+  border-radius: 22px;
+
+}
+
+
+.video-wrap video {
+  width: 100%;
+  display: block;
+  border-radius: 14px;
+  max-height: 430px;
+  background: #09070d;
+
+}
+
+.video-note {
+  text-align: center;
+  color: var(--muted);
+  font-size: .85rem;
+  margin-top: 15px;
+
+
+} 
+
+/* =========================
+   PENUTUP
+========================= */
+.closing {
+  text-align: center;
+  padding-bottom: 120px;
+}
+.closing h2 {
+  font: 600 clamp(2.7rem, 7vw, 5rem) 'Playfair Display', serif;
+  color: var(--pink-dark);
+}
+.closing p {
+  color: var(--muted);
+  line-height: 2;
+}
+
+/* =========================
+   FOOTER
+========================= */
+.footer {
+  text-align: center;
+  border-top: 1px solid #e9a8bd55;
+  padding: 25px;
+  color: #a77d91;
+  font-size: .8rem;
+}
+
+/* =========================
+   MUSIC
+========================= */
+.music {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 8;
+  border: 1px solid #e9a8bd77;
+  background: #fff0f5ee;
+  color: #a65379;
+  border-radius: 50px;
+  padding: 12px 18px;
+  cursor: pointer;
+  box-shadow: 0 5px 20px #bd789733;
+}
+
+/* =========================
+   MODAL FOTO
+========================= */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: #08050ddd;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+.modal img {
+  max-width: 90vw;
+  max-height: 82vh;
+  border: 9px solid #fff5ed;
+  border-radius: 5px;
+}
+.modal button {
+  position: absolute;
+  top: 15px;
+  right: 24px;
+  background: none;
+  color: white;
+  border: 0;
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+.hidden {
+  display: none !important;
+}
+
+/* =========================
+   CONFETTI
+========================= */
+.confetti {
+  position: fixed;
+  top: -15px;
+  width: 8px;
+  height: 13px;
+  z-index: 30;
+  pointer-events: none;
+  animation: fall 4s linear forwards;
+}
+
+/* =========================
+   RESPONSIVE HP
+========================= */
+@media(max-width:700px) {
+  nav {
+    gap: 13px;
+    padding: 15px 5px;
+  }
+  nav a {
+    font-size: .61rem;
+  }
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  .photo img {
+    height: 210px;
+  }
+  section {
+    padding: 80px 18px;
+  }
+  .cover-content {
+    padding: 30px 15px;
+  }
+}
+@media(max-width:420px) {
+  .gallery {
+    gap: 12px;
+  }
+  .photo img {
+    height: 165px;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- BINTANG BACKGROUND -->
+<div class="stars" id="stars"></div>
+
+<!-- =========================
+     HALAMAN PEMBUKA
+========================= -->
+<section class="cover" id="cover">
+  <div class="cover-content">
+    <div class="cover-heart">♡</div>
+    <div class="eyebrow">
+      A Special Moment For Two
+    </div>
+    <h1>
+      Someone Just<br>
+      <span>Said Yes!</span>
+    </h1>
+    <p class="cover-description">
+      A beautiful beginning of forever.
+      Hari istimewa untuk dua hati yang
+      memilih berjalan bersama.
+    </p>
+    <div class="cover-names" id="coverNames">
+      Nanda & Farel
+    </div>
+    <div class="eyebrow">
+      A New Chapter Begins
+    </div>
+    <br><br>
+    <button class="btn" id="openSurprise">
+      Open Your Surprise ♡
+    </button>
+    <p style="font-size:.7rem;color:#a77d91;margin-top:25px;">
+      Made with love for your special day
+    </p>
+  </div>
+</section>
+
+<!-- =========================
+     SELURUH WEBSITE
+========================= -->
+<div id="siteContent">
+  <!-- NAVIGATION -->
+  <nav id="nav">
+    <a href="#home">Home</a>
+    <a href="#message">Ucapan</a>
+    <a href="#gallery">Galeri</a>
+    <a href="#moment">Moment</a>
+  </nav>
+
+  <!-- TOMBOL MUSIK -->
+  <button class="music" id="musicBtn">
+    ♫ Music: Off
+  </button>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div style="text-align:center;">
+        <div class="cover-heart">♡</div>
+        <div class="eyebrow">
+          Congratulations On Your Engagement
+        </div>
+        <h1 style="
+          font:600 clamp(2.8rem,8vw,5rem) 'Playfair Display',serif;
+          color:#a65c7b;
+          margin:20px 0;
+        ">
+          Here's Your<br>
+          <span style="color:#d77c9f;font-style:italic;">
+            Beautiful Beginning
+          </span>
+        </h1>
+        <p class="cover-description">
+          Dua hati, satu tujuan, dan sebuah perjalanan
+          baru yang akan dimulai.
+        </p>
+        <div class="cover-names" id="coupleNames">
+          Nanda & Farel
+        </div>
+        <a href="#message" class="btn">
+          Read Your Wishes ♡
+        </a>
+      </div>
+    </section>
+
+    <!-- UCAPAN -->
+    <section id="message">
+      <div class="section-title">
+        <div class="eyebrow">
+          A Little Note From Your Friend
+        </div>
+        <h2>With Love & Happiness</h2>
+        <p>
+          Some moments deserve to be celebrated forever.
+        </p>
+      </div>
+      <div class="card letter">
+        <div class="salute">
+          Dear Nanda & Farel,
+        </div>
+        <p>
+          Finally, the beautiful moment has arrived!
+        </p>
+        <p>
+        ⁠Bunaa selamaat yaa, gakerasa udah sampe di tahap inii,
+        ga gampangg tapi lu bisa ngelewatin semua badai dan dramanya,
+        gua nyaksiin bgt lagii wkwkk, semoga lu bahagiaa teruss , 
+        selalu di kelilingi orang2 baik dan farel selalu ada di pihaklu 
+        sampe kapanpun. 
+        You happy im happy bunaa loveyouuu🫶🏻🫶🏻🥰🥰💐✨✨  -Ochi
+        </p>
+        <p>
+          Happy engagement bunaaaaaaque, 
+          lancar-lancar ampe hari H nanti...
+          asekkkkk kawinnn kawin prikitiw💃  -Sipa
+        </p>
+        <p>
+          Happy Engagement Day, Nanda cantikk!!
+          Asiik one step closer yaa...
+          Semoga di segala prosesnya diberikan 
+          kemudahan dan kelancaran yaa!!
+          Sehat sehat sampai hari pernikahan aamiin❤️🫶🏼💐  -Ninis
+        </p>
+        <p>
+          Happy engagement day nandutt...💕💐
+          ahkirnya bisa sampe nikah juga yee, lancar-lancar 
+          sampai hari pernikahan, 
+          semoga Allah SWT selalu menjaga hubungan kalian 
+          sampai maut memisahkan. 
+          Once again, congratulations, lovebirds! 🕊️🤍  -Kia
+        </p>
+        <p>
+          Happy engagement day bunaaa!!! from highschool days
+          and now you both here 🥺 more happiness 
+          to come yhh calon pasutri🌸🌸🌸  -Sopi
+        </p>
+        <p>
+          Happy engagement, Nanda. 
+          Can’t believe you’re now one step closer 
+          to become someone’s wife. 
+          いつも幸せになりますように  -Naila
+        </p>
+        <p>
+          <b>
+            Wishing you both a lifetime of love and happiness!
+          </b>
+          <br>
+          Once again, congratulations on your special day!
+        </p>
+        <div class="signature">
+          With love, your friend ♡
+        </div>
+      </div>
+    </section>
+
+    <!-- GALERI FOTO -->
+    <section id="gallery">
+      <div class="section-title">
+        <div class="eyebrow">
+          Little Pieces Of Happiness
+        </div>
+        <h2>Beautiful Memories</h2>
+        <p>
+          Every picture tells a beautiful story.
+        </p>
+      </div>
+      <div class="gallery">
+        <div class="photo" style="--r:-3deg" onclick="showPhoto(this)">
+          <img src="image/nanda4.jpg" alt="Kenangan 1">
+          <p>A day to remember ♡</p>
+        </div>
+        <div class="photo" style="--r:2deg" onclick="showPhoto(this)">
+          <img src="image/nanda1.jpg" alt="Kenangan 2">
+          <p>Made for each other</p>
+        </div>
+        <div class="photo" style="--r:3deg" onclick="showPhoto(this)">
+          <img src="image/nanda2.jpg" alt="Kenangan 3">
+          <p>Beautiful moments</p>
+        </div>
+        <div class="photo" style="--r:-2deg" onclick="showPhoto(this)">
+          <img src="image/nanda3.jpg" alt="Kenangan 4">
+          <p>The beginning</p>
+        </div>
+        <div class="photo" style="--r:2deg" onclick="showPhoto(this)">
+          <img src="image/nanda5.jpg" alt="Kenangan 5">
+          <p>So much love</p>
+        </div>
+        <div class="photo" style="--r:-3deg" onclick="showPhoto(this)">
+          <img src="image/nanda 6.jpg" alt="Kenangan 6">
+          <p>To a lifetime together</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOTO TAMBAHAN (SEBELUM VIDEO) -->
+    <section id="special-photo">
+      <div class="section-title">
+        <div class="eyebrow">
+          Unforgettable Story
+        </div>
+        <h2>High School Memories</h2>
+        <p>
+          Masa-masa indah yang selalu dikenang.
+        </p>
+      </div>
+      <div class="image-wrap">
+        <img src="image/nanda7.jpg" alt="Kenangan 7" onclick="showPhoto(this)" style="cursor: pointer;">
+      </div>
+      <div class="image-note">
+        <b>Jangan lupain momen ini yaaa</b>
+      </div>
+    </section>
+    
+    <!-- VIDEO -->
+    <section id="moment">
+      <div class="section-title">
+        <div class="eyebrow">
+          A Moment Worth Replaying
+        </div>
+        <h2>Our Special Moment</h2>
+        <p>
+          A beautiful memory that will last forever.
+        </p>
+      </div>
+      <div class="video-wrap">
+        <video controls>
+          <source src="video/videooca.mp4" type="video/mp4">
+          Browser Anda tidak mendukung pemutaran video.
+        </video>
+      </div>
+      <div class="video-note">
+        <b class="bold">Satu video, sejuta memori.</b>
+        <b class="bold">Semoga tawa dan kebahagiaan di video ini tidak pernah pudar ya.</b>
+        <b class="bold">Terima kasih sudah memilih untuk terus berjalan bersama, hari ini dan selamanya.</b>
+        <b class="bold">Selamat melangkah ke babak baru, kalian berdua! 🤍</b>
+        
+      </div>
+    </section>
+
+
+    <!-- PENUTUP -->
+    <section class="closing">
+      <div class="cover-heart">♡</div>
+      <div class="eyebrow">
+        And So The Adventure Begins
+      </div>
+      <h2>Here's To Forever!</h2>
+      <p>
+        May your love story be even more beautiful
+        with every passing day.
+        <br><br>
+        Two hearts, one journey,
+        and a lifetime of happiness.
+      </p>
+      <br>
+      <button class="btn" onclick="celebrate()">
+        Celebrate Love ✨
+      </button>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    Made with love, from your friend ♡
+  </footer>
+</div>
+
+<!-- MODAL FOTO -->
+<div class="modal hidden" id="photoModal" onclick="closePhoto()">
+  <button aria-label="Close">×</button>
+  <img id="modalImg" alt="Expanded memory">
+</div>
+
+<!-- MUSIK BACKGROUND (Perunggu - Ini Abadi) -->
+<audio id="bgMusic" loop preload="auto">
+  <source src="audio/iniabadi.mp3.mpeg" type="audio/mpeg">
+</audio>
+
+<script>
+/* =========================
+   EDIT NAMA PASANGAN
+========================= */
+const CONFIG = {
+  coupleNames: "Nanda & Farel"
+};
+
+/* =========================
+   NAMA PASANGAN
+========================= */
+document.getElementById("coupleNames").textContent =
+  CONFIG.coupleNames;
+document.getElementById("coverNames").textContent =
+  CONFIG.coupleNames;
+document.querySelector(".salute").textContent =
+  `Dear ${CONFIG.coupleNames},`;
+
+/* =========================
+   ANIMASI BINTANG
+========================= */
+const starBox = document.getElementById("stars");
+for (let i = 0; i < 85; i++) {
+  let star = document.createElement("i");
+  star.className = "star";
+  star.style.left = Math.random() * 100 + "%";
+  star.style.top = Math.random() * 100 + "%";
+  star.style.animationDelay =
+    Math.random() * 3 + "s";
+  star.style.opacity =
+    Math.random() * 0.7;
+  starBox.appendChild(star);
+}
+
+/* =========================
+   MUSIK
+========================= */
+const music = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicBtn");
+
+musicBtn.addEventListener("click", async () => {
+  if (music.paused) {
+    try {
+      await music.play();
+      musicBtn.textContent = "♫ Music: On";
+    } catch (error) {
+      alert("Pastikan file iniabadi.mp3 sudah tersedia di folder /audio.");
+    }
+  } else {
+    music.pause();
+    musicBtn.textContent = "♫ Music: Off";
+  }
+});
+
+/* =========================
+   TOMBOL OPEN SURPRISE
+========================= */
+const openButton =
+  document.getElementById("openSurprise");
+openButton.addEventListener("click", async function() {
+  // Munculkan website
+  document.body.classList.add("opened");
+  openButton.textContent = "Welcome! ♡";
+  openButton.disabled = true;
+
+  // Putar musik otomatis setelah interaksi
+  try {
+    await music.play();
+    musicBtn.textContent = "♫ Music: On";
+  } catch (error) {
+    musicBtn.textContent = "♫ Music: Off";
+  }
+
+  // Efek confetti
+  celebrate();
+
+  // Scroll menuju ucapan
+  setTimeout(() => {
+    document.getElementById("message")
+      .scrollIntoView({
+        behavior: "smooth"
+      });
+  }, 700);
+});
+
+/* =========================
+   GALERI FOTO
+========================= */
+function showPhoto(element) {
+  const image =
+    element.querySelector("img");
+  document.getElementById("modalImg").src =
+    image.src;
+  document.getElementById("photoModal")
+    .classList.remove("hidden");
+}
+
+function closePhoto() {
+  document.getElementById("photoModal")
+    .classList.add("hidden");
+}
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    closePhoto();
+  }
+});
+
+/* =========================
+   ANIMASI CONFETTI
+========================= */
+function celebrate() {
+  let colors = [
+    "#e9a8bd",
+    "#e7c98b",
+    "#fff5ed",
+    "#b99bd6",
+    "#f28ca8"
+  ];
+  for (let i = 0; i < 100; i++) {
+    let confetti = document.createElement("i");
+    confetti.className = "confetti";
+    confetti.style.left =
+      Math.random() * 100 + "vw";
+    confetti.style.background =
+      colors[Math.floor(Math.random() * colors.length)];
+    confetti.style.animationDelay =
+      Math.random() * 1.5 + "s";
+    document.body.appendChild(confetti);
+    setTimeout(() => {
+      confetti.remove();
+    }, 5500);
+  }
+}
+</script>
+</body>
+</html>
